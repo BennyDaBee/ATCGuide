@@ -4,14 +4,14 @@
 
 <h1>Display Radio Buttons</h1>
 
-<form action="/action_page.php">
+
   <p>Flight Stage:</p>
-  <input type="radio" id="clear" name="stage" value="clear">
+  <input type="radio" id="clear" name="stage" value="clear" onclick="change_text();">
   <label for="clear">Clearence</label><br>
   <input type="radio" id="readclear" name="stage" value="readclear">
   <label for="readclear">Readback</label><br>
   <input type="radio" id="Taxi" name="stage" value="Taxi">
-  <label for="Taxi">Taxi</label>
+  <label for="Taxi">Taxi</label><br>
   <input type="radio" id="readtaxi" name="stage" value="readtaxi">
   <label for="readtaxi">Readback</label><br>
   <input type="radio" id="dept" name="stage" value="dept">
@@ -26,7 +26,23 @@
   <label for="ifr">IFR</label><br>
   <input type="radio" id="vfr" name="type" value="VFR">
   <label for="vfr">VFR</label><br>
-</form>
+
+  <label for="orgair">Origin Airport:</label>
+  <input type="text" id="orgair" name="orgair"><br>
+  
+  <textarea id="atcread" name="atcread" rows="5" cols="50"></textarea>
+
+	<script type="text/javascript"></script>
+
+	<script>
+    function change_text() {
+    	if (document.getElementById('orgair').value == "") {
+        	document.getElementById("atcread").innerHTML = "Please enter a valid Origin Airport";
+        } else {
+     		document.getElementById("atcread").innerHTML = document.getElementById('orgair').value;
+		}
+     }
+     </script>
 
 </body>
 </html>
