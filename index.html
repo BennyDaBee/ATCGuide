@@ -2,44 +2,160 @@
 <html>
 <body>
 
-<h1>Display Radio Buttons</h1>
+<h1>ATC Help</h1>
 
+<div style="width: 100%; height: 150px;">
+	<div style="width: 15%; height: 100px; float: left;">
+      <p>Flight Stage:</p>
+      <input type="radio" id="clear" name="stage" value="clear" onclick="clearence();">
+      <label for="clear">Clearence</label><br>
 
-  <p>Flight Stage:</p>
-  <input type="radio" id="clear" name="stage" value="clear" onclick="change_text();">
-  <label for="clear">Clearence</label><br>
-  <input type="radio" id="readclear" name="stage" value="readclear">
-  <label for="readclear">Readback</label><br>
-  <input type="radio" id="Taxi" name="stage" value="Taxi">
-  <label for="Taxi">Taxi</label><br>
-  <input type="radio" id="readtaxi" name="stage" value="readtaxi">
-  <label for="readtaxi">Readback</label><br>
-  <input type="radio" id="dept" name="stage" value="dept">
-  <label for="dept">Departure</label><br>
-  <input type="radio" id="inflight" name="stage" value="inflight">
-  <label for="inflight">In Flight</label><br>
+      <input type="radio" id="readclear" name="stage" value="readclear" onclick="clearread();">
+      <label for="readclear">Readback</label><br>
 
+      <input type="radio" id="Taxi" name="stage" value="Taxi" onclick="taxi();">
+      <label for="Taxi">Taxi</label><br>
+
+      <input type="radio" id="readtaxi" name="stage" value="readtaxi" onclick="taxiread();">
+      <label for="readtaxi">Readback</label><br>
+
+      <input type="radio" id="dept" name="stage" value="dept" onclick="departure();">
+      <label for="dept">Departure</label><br>
+
+      <input type="radio" id="inflight" name="stage" value="inflight">
+      <label for="inflight">In Flight</label><br>
+	</div>
+    <div style="width : 85%; height: 100px; float: right;">
+    	<label for="flnum">Flight Number:</label>
+        <input type="text" id="flnum" name="flnum" size="5">
+    	<label for="orgair">Origin Airport:</label>
+  	<input type="text" id="orgair" name="destair" size="9">
+        <label for="destair">Destination Airport:</label>
+  	<input type="text" id="destair" name="destair" size="9"><br><br>
+
+	<label for="squawk">Squawk:</label>
+        <input type="text" id="squawk" name="squawk" size="13">
+    	<label for="freq1">Frequency 1:</label>
+  	<input type="text" id="freq1" name="freq1" size="10">
+        <label for="freq2">Frequency 2:</label>
+  	<input type="text" id="freq2" name="freq2" size="16"><br><br>
+
+	<label for="deptfreq">Departure Frequency:</label>
+        <input type="text" id="deptfreq" name="deptfreq" size="13">
+	<label for="aftdept">Maintain After Dept:</label>
+        <input type="text" id="aftdept" name="aftdept" size="13">
+    	<label for="formin">For Minutes:</label>
+  	<input type="text" id="formin" name="formin" size="10">
+        <label for="expclimb">Expect To Climb To:</label>
+  	<input type="text" id="expclimb" name="expclimb" size="16"><br><br>
+	
+	<label for="taxiwy">Taxi:</label>
+        <input type="text" id="taxiwy" name="taxiwy" size="13">
+	<label for="runway">Runway:</label>
+        <input type="text" id="runway" name="runway" size="13">
+        
+    </div>
+</div>
   <br>  
 
   <p>Flight Type:</p>
   <input type="radio" id="ifr" name="type" value="IFR">
   <label for="ifr">IFR</label><br>
   <input type="radio" id="vfr" name="type" value="VFR">
-  <label for="vfr">VFR</label><br>
-
-  <label for="orgair">Origin Airport:</label>
-  <input type="text" id="orgair" name="orgair"><br>
+  <label for="vfr">VFR</label><br><br>
   
-  <textarea id="atcread" name="atcread" rows="5" cols="50"></textarea>
+  <div style="width: 100%; height: 150px;">
+	<div style="width: 50%; height: 100px; float: left;">
+      <label for="atcread">ATC Readout</label><br>
+      <textarea id="atcread" name="atcread" rows="5" cols="50"></textarea>
+    </div>
+    <div style="width: 50%; height: 100px; float: left;">
+    	<label for="atcread">Notes</label><br>
+    	<textarea id="notes" name="notes" rows="5" cols="50"></textarea>
+    </div>
+  </div>
 
 	<script type="text/javascript"></script>
 
 	<script>
-    function change_text() {
-    	if (document.getElementById('orgair').value == "") {
-        	document.getElementById("atcread").innerHTML = "Please enter a valid Origin Airport";
+    function set_white() { 
+    	document.getElementById("orgair").style.backgroundColor = "white";
+	document.getElementById("flnum").style.backgroundColor = "white";
+	document.getElementById("destair").style.backgroundColor = "white";
+	document.getElementById("squawk").style.backgroundColor = "white";
+	document.getElementById("freq1").style.backgroundColor = "white";
+	document.getElementById("freq2").style.backgroundColor = "white";
+	document.getElementById("deptfreq").style.backgroundColor = "white";
+	document.getElementById("aftdept").style.backgroundColor = "white";
+	document.getElementById("formin").style.backgroundColor = "white";
+	document.getElementById("expclimb").style.backgroundColor = "white";
+	document.getElementById("taxiwy").style.backgroundColor = "white";
+	document.getElementById("runway").style.backgroundColor = "white";
+    }
+	
+    function clearread() {
+    	set_white();
+	if (document.getElementById('squawk').value == "" || document.getElementById('deptfreq').value == "" || document.getElementById('aftdept').value == "" || document.getElementById('formin').value == "" || document.getElementById('expclimb').value == ""){
+	document.getElementById("atcread").innerHTML = "Please fill in all proper information.";
+        document.getElementById("squawk").style.backgroundColor = "yellow";
+	document.getElementById("deptfreq").style.backgroundColor = "yellow";
+	document.getElementById("aftdept").style.backgroundColor = "yellow";
+	document.getElementById("formin").style.backgroundColor = "yellow";
+	document.getElementById("expclimb").style.backgroundColor = "yellow";
+	} else {
+		document.getElementById("atcread").innerHTML = document.getElementById('flnum').value + " cleared for " + document.getElementById('destair').value + " [TRANSITION IF PROVIDED BY ATC] as filed. Maintain " + document.getElementById('aftdept').value + " expect " + document.getElementById('expclimb').value + " " + document.getElementById('formin').value + " after departure. Departure frequency " + document.getElementById('deptfreq').value + ". Squawk " + document.getElementById('squawk').value + " " + document.getElementById('flnum').value;
+    }
+   }
+
+    function taxi() {
+	set_white();
+	if (document.getElementById('flnum').value == "") {
+		document.getElementById("atcread").innerHTML = "Please fill in all proper information.";
+		document.getElementById("flnum").style.backgroundColor = "yellow";
+	} else {
+		document.getElementById("atcread").innerHTML = document.getElementById("flnum").value + " request taxi.";
+	}
+    }
+
+    function taxiread() {
+	set_white();
+	if (document.getElementById('flnum').value == "" || document.getElementById('taxiwy').value == "" || document.getElementById('runway').value == "") {
+		document.getElementById("atcread").innerHTML = "Please fill in all proper information.";
+		document.getElementById("flnum").style.backgroundColor = "yellow";
+		document.getElementById("taxiwy").style.backgroundColor = "yellow";
+		document.getElementById("runway").style.backgroundColor = "yellow";
+	} else {
+		document.getElementById("atcread").innerHTML = document.getElementById("flnum").value + " taxi via " + document.getElementById("taxiwy").value + " for/hold short runway " + document.getElementById("runway").value;
+	}
+    }
+
+    function departure() { 
+	set_white();
+	if (document.getElementById('flnum').value == "" || document.getElementById('runway').value == "") {
+		document.getElementById("atcread").innerHTML = "Please fill in all proper information.";
+		document.getElementById("flnum").style.backgroundColor = "yellow";
+		document.getElementById("runway").style.backgroundColor = "yellow";
+	} else { 
+		document.getElementById("atcread").innerHTML = document.getElementById("flnum").value + " holding short of runway " + document.getElementById("runway").value + ". Ready for departure.";
+	}
+    }
+    
+    function clearence() {
+	if (document.getElementById('ifr').checked) {
+		var fl = "IFR";
+	} else if (document.getElementById('vfr').checked) { 
+		var fl = "VFR";
+	} else {
+		var fl = "VFR/IFR";
+	}
+    	set_white();
+    	if (document.getElementById('flnum').value == "" || document.getElementById('orgair').value == "" || document.getElementById('destair').value == "") {
+        	document.getElementById("atcread").innerHTML = "Please fill in all proper information.";
+            document.getElementById("flnum").style.backgroundColor = "yellow";
+            document.getElementById("orgair").style.backgroundColor = "yellow";
+            document.getElementById("destair").style.backgroundColor = "yellow";
         } else {
-     		document.getElementById("atcread").innerHTML = document.getElementById('orgair').value;
+     		document.getElementById("atcread").innerHTML = "TOWER CENTER HERE " +  document.getElementById('flnum').value + " on ground at " + document.getElementById('orgair').value + " " + fl + " to " + document.getElementById('destair').value + " with weather";
 		}
      }
      </script>
